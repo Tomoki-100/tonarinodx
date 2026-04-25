@@ -217,6 +217,79 @@
         </div>
     </section>
 
+    <!-- Integration -->
+    <section id="integration" class="py-24 overflow-hidden" style="background:#f0f4f8;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="font-bold tracking-wider uppercase text-sm mb-2" style="color:#f97316;">Integration</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color:#0f172a;">バラバラなツールを、つなげて自動化。</h2>
+                <p class="text-base md:text-lg" style="color:#334155;">既存のサービスをAPIで連携し、業務フローをまるごと効率化します</p>
+            </div>
+
+            <!-- Flow Diagram -->
+            <div class="relative flex items-center justify-center gap-0 mb-14" style="min-height:320px;">
+                <!-- Canvas -->
+                <canvas id="integration-canvas" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:0;"></canvas>
+
+                <!-- Left: Input tools -->
+                <div class="relative flex flex-col gap-3 z-10" id="intg-left">
+                    <div class="intg-tool px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all duration-300" style="background:#ffffff;border:1px solid #d9e2ec;color:#334155;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" class="w-5 h-5" alt="Slack"> Slack
+                    </div>
+                    <div class="intg-tool px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all duration-300" style="background:#ffffff;border:1px solid #d9e2ec;color:#334155;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" class="w-5 h-5 rounded" alt="Notion"> Notion
+                    </div>
+                    <div class="intg-tool px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all duration-300" style="background:#ffffff;border:1px solid #d9e2ec;color:#334155;">
+                        <i class="fa-solid fa-table-cells text-green-600 w-5 text-center"></i> Excel・GS
+                    </div>
+                    <div class="intg-tool px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all duration-300" style="background:#ffffff;border:1px solid #d9e2ec;color:#334155;">
+                        <i class="fa-solid fa-envelope text-blue-500 w-5 text-center"></i> Gmail・FAX
+                    </div>
+                </div>
+
+                <!-- Center: Hub -->
+                <div class="relative mx-8 md:mx-16 flex-shrink-0 z-10" id="intg-hub">
+                    <div class="w-28 h-28 md:w-36 md:h-36 rounded-full flex flex-col items-center justify-center text-white font-black text-sm md:text-base shadow-2xl" style="background:linear-gradient(135deg,#1a365d,#0f172a);border:2px solid #f97316;">
+                        <span>AI</span>
+                        <span class="text-xs font-bold mt-0.5" style="color:#f97316;">自動化</span>
+                    </div>
+                </div>
+
+                <!-- Right: Output tools -->
+                <div class="relative flex flex-col gap-3 z-10" id="intg-right">
+                    <div class="intg-tool px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all duration-300" style="background:#ffffff;border:1px solid #d9e2ec;color:#334155;">
+                        <i class="fa-solid fa-bell text-yellow-500 w-5 text-center"></i> 自動通知
+                    </div>
+                    <div class="intg-tool px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all duration-300" style="background:#ffffff;border:1px solid #d9e2ec;color:#334155;">
+                        <i class="fa-solid fa-chart-bar text-blue-500 w-5 text-center"></i> 自動集計
+                    </div>
+                    <div class="intg-tool px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all duration-300" style="background:#ffffff;border:1px solid #d9e2ec;color:#334155;">
+                        <i class="fa-solid fa-cloud-arrow-up text-indigo-500 w-5 text-center"></i> 自動保存
+                    </div>
+                    <div class="intg-tool px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all duration-300" style="background:#ffffff;border:1px solid #d9e2ec;color:#334155;">
+                        <i class="fa-solid fa-robot w-5 text-center" style="color:#f97316;"></i> AI自動返信
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-4">
+                <div class="rounded-2xl p-8 text-center shadow-sm" style="background:#ffffff;border:1px solid #d9e2ec;">
+                    <p class="text-5xl font-black mb-2" style="color:#f97316;">70<span class="text-3xl">%</span></p>
+                    <p class="font-bold" style="color:#334155;">作業時間削減</p>
+                </div>
+                <div class="rounded-2xl p-8 text-center shadow-sm" style="background:#ffffff;border:1px solid #d9e2ec;">
+                    <p class="text-5xl font-black mb-2" style="color:#f97316;">24<span class="text-3xl">h</span></p>
+                    <p class="font-bold" style="color:#334155;">自動対応</p>
+                </div>
+                <div class="rounded-2xl p-8 text-center shadow-sm" style="background:#ffffff;border:1px solid #d9e2ec;">
+                    <p class="text-5xl font-black mb-2" style="color:#f97316;">30,000<span class="text-2xl">円〜</span></p>
+                    <p class="font-bold" style="color:#334155;">スモールスタート</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Works -->
     <section id="works" class="py-24 bg-navy-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -528,6 +601,122 @@
 
             setInterval(() => { cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0'; }, 530);
             setTimeout(tick, 600);
+        })();
+
+        /* --- Integration Canvas Animation --- */
+        (function() {
+            function initIntegration() {
+                const canvas = document.getElementById('integration-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                const leftEl = document.getElementById('intg-left');
+                const hubEl = document.getElementById('intg-hub');
+                const rightEl = document.getElementById('intg-right');
+                const tools = leftEl ? Array.from(leftEl.querySelectorAll('.intg-tool')) : [];
+                const outTools = rightEl ? Array.from(rightEl.querySelectorAll('.intg-tool')) : [];
+                let particles = [];
+                let frame = 0;
+                let activeLeft = -1, activeRight = -1;
+
+                function resize() {
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    canvas.width = rect.width;
+                    canvas.height = rect.height;
+                }
+
+                function getCenter(el) {
+                    const cr = canvas.getBoundingClientRect();
+                    const r = el.getBoundingClientRect();
+                    return { x: r.left - cr.left + r.width / 2, y: r.top - cr.top + r.height / 2 };
+                }
+
+                function getToolCenter(el) {
+                    const cr = canvas.getBoundingClientRect();
+                    const r = el.getBoundingClientRect();
+                    return { x: r.left - cr.left + r.width, y: r.top - cr.top + r.height / 2 };
+                }
+
+                function getToolCenterRight(el) {
+                    const cr = canvas.getBoundingClientRect();
+                    const r = el.getBoundingClientRect();
+                    return { x: r.left - cr.left, y: r.top - cr.top + r.height / 2 };
+                }
+
+                function spawnParticle(from, to, side) {
+                    particles.push({ x: from.x, y: from.y, tx: to.x, ty: to.y, progress: 0, side });
+                }
+
+                function drawDashedLine(x1, y1, x2, y2) {
+                    ctx.save();
+                    ctx.setLineDash([6, 5]);
+                    ctx.strokeStyle = 'rgba(15,23,42,0.15)';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                function drawSolidLine(x1, y1, x2, y2) {
+                    ctx.save();
+                    ctx.setLineDash([]);
+                    ctx.strokeStyle = 'rgba(15,23,42,0.15)';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    if (!hubEl || !leftEl || !rightEl) { requestAnimationFrame(animate); return; }
+
+                    const hub = getCenter(hubEl.querySelector('div'));
+
+                    tools.forEach(t => { drawDashedLine(getToolCenter(t).x, getToolCenter(t).y, hub.x, hub.y); });
+                    outTools.forEach(t => { drawSolidLine(hub.x, hub.y, getToolCenterRight(t).x, getToolCenterRight(t).y); });
+
+                    if (frame % 40 === 0) {
+                        const li = Math.floor(Math.random() * tools.length);
+                        const ri = Math.floor(Math.random() * outTools.length);
+                        activeLeft = li; activeRight = ri;
+                        tools.forEach((t, i) => { t.style.border = i === li ? '1.5px solid #f97316' : '1px solid #d9e2ec'; });
+                        outTools.forEach((t, i) => { t.style.border = i === ri ? '1.5px solid #f97316' : '1px solid #d9e2ec'; });
+                        spawnParticle(getToolCenter(tools[li]), hub, 'left');
+                        spawnParticle(hub, getToolCenterRight(outTools[ri]), 'right');
+                    }
+
+                    particles = particles.filter(p => p.progress <= 1);
+                    particles.forEach(p => {
+                        p.progress += 0.025;
+                        const x = p.x + (p.tx - p.x) * p.progress;
+                        const y = p.y + (p.ty - p.y) * p.progress;
+                        ctx.beginPath();
+                        ctx.arc(x, y, 4, 0, Math.PI * 2);
+                        ctx.fillStyle = '#f97316';
+                        ctx.shadowColor = '#f97316';
+                        ctx.shadowBlur = 8;
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                    });
+
+                    frame++;
+                    requestAnimationFrame(animate);
+                }
+
+                resize();
+                window.addEventListener('resize', resize);
+                animate();
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initIntegration);
+            } else {
+                initIntegration();
+            }
         })();
 
         /* --- Mobile Menu & FAQ --- */
