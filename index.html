@@ -77,25 +77,25 @@
     </header>
 
     <!-- Hero -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2000" alt="チームでの伴走支援" class="w-full h-full object-cover object-center">
-            <div class="absolute inset-0 bg-navy-900/80"></div>
-        </div>
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background:#f0f7ff;">
+        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6">
-                となりにいるから、<br class="md:hidden">はじめられるDX。
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold mb-6" style="background:rgba(249,115,22,0.12);color:#ea580c;border:1px solid rgba(249,115,22,0.35);">
+                <i class="fa-solid fa-location-dot"></i> AI × DX支援 ／ 名古屋
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6" style="color:#0f172a;">
+                となりにいるから、<br><span id="typing-text"></span><span id="typing-cursor" style="color:#f97316;">|</span>
             </h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl text-slate-300 font-medium mb-10">中小企業のための、やさしい業務改善と開発支援</p>
+            <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl font-medium mb-10" style="color:#475569;">中小企業のための、やさしい業務改善と開発支援</p>
             <div class="flex justify-center">
-                <a href="#contact" class="bg-accent-500 hover:bg-accent-600 text-white text-lg font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                <a href="#contact" class="text-white text-lg font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-2" style="background:#f97316;" onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#f97316'">
                     まずはご相談ください（無料） <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
         </div>
         <div class="absolute bottom-0 w-full overflow-hidden leading-none z-10">
             <svg class="relative block w-full h-[50px] md:h-[100px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,120.31,200.5,110.5,241.1,104.91,281.41,83.4,321.39,56.44Z" fill="#ffffff"></path>
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,120.31,200.5,110.5,241.1,104.91,281.41,83.4,321.39,56.44Z" fill="#f8fafc"></path>
             </svg>
         </div>
     </section>
@@ -430,6 +430,107 @@
     </footer>
 
     <script>
+        /* --- Canvas Particle Animation --- */
+        (function() {
+            const canvas = document.getElementById('hero-canvas');
+            const ctx = canvas.getContext('2d');
+            const NODE_COLOR = 'rgba(26,54,93,0.35)';
+            const LINE_COLOR = 'rgba(15,23,42,0.12)';
+            const NODE_COUNT = 60;
+            const CONNECT_DIST = 140;
+            let nodes = [];
+
+            function resize() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+
+            function initNodes() {
+                nodes = [];
+                for (let i = 0; i < NODE_COUNT; i++) {
+                    nodes.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.4,
+                        vy: (Math.random() - 0.5) * 0.4,
+                        r: Math.random() * 2 + 1.5
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < nodes.length; i++) {
+                    const a = nodes[i];
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const b = nodes[j];
+                        const dx = a.x - b.x, dy = a.y - b.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < CONNECT_DIST) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = LINE_COLOR;
+                            ctx.lineWidth = 1;
+                            ctx.globalAlpha = 1 - dist / CONNECT_DIST;
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.stroke();
+                            ctx.globalAlpha = 1;
+                        }
+                    }
+                    ctx.beginPath();
+                    ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+                    ctx.fillStyle = NODE_COLOR;
+                    ctx.fill();
+                    a.x += a.vx;
+                    a.y += a.vy;
+                    if (a.x < 0 || a.x > canvas.width) a.vx *= -1;
+                    if (a.y < 0 || a.y > canvas.height) a.vy *= -1;
+                }
+                requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', () => { resize(); initNodes(); });
+            resize();
+            initNodes();
+            draw();
+        })();
+
+        /* --- Typing Animation --- */
+        (function() {
+            const phrases = ['はじめられるDX。', 'かわれる業務。', 'つながる未来。'];
+            const el = document.getElementById('typing-text');
+            const cursor = document.getElementById('typing-cursor');
+            let pi = 0, ci = 0, deleting = false;
+
+            function tick() {
+                const phrase = phrases[pi];
+                if (!deleting) {
+                    el.textContent = phrase.slice(0, ci + 1);
+                    ci++;
+                    if (ci === phrase.length) {
+                        deleting = true;
+                        setTimeout(tick, 1800);
+                        return;
+                    }
+                    setTimeout(tick, 100);
+                } else {
+                    el.textContent = phrase.slice(0, ci - 1);
+                    ci--;
+                    if (ci === 0) {
+                        deleting = false;
+                        pi = (pi + 1) % phrases.length;
+                        setTimeout(tick, 400);
+                        return;
+                    }
+                    setTimeout(tick, 55);
+                }
+            }
+
+            setInterval(() => { cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0'; }, 530);
+            setTimeout(tick, 600);
+        })();
+
+        /* --- Mobile Menu & FAQ --- */
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => { menu.classList.toggle('hidden'); });
