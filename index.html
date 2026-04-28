@@ -919,22 +919,28 @@
             ];
 
             function makeSprite(text) {
-                const fontSize = 20;
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const fontSize = 28;
                 const tmp = document.createElement('canvas').getContext('2d');
-                tmp.font = `300 ${fontSize}px "Helvetica Neue", Arial, sans-serif`;
+                tmp.font = `400 ${fontSize}px "Noto Sans JP", "Helvetica Neue", Arial, sans-serif`;
                 const tw = tmp.measureText(text).width;
+                const logW = Math.ceil(tw) + 48;
+                const logH = 56;
                 const c = document.createElement('canvas');
-                c.width  = Math.ceil(tw) + 46;
-                c.height = 52;
+                c.width  = logW * dpr;
+                c.height = logH * dpr;
                 const ctx = c.getContext('2d');
+                ctx.scale(dpr, dpr);
                 ctx.beginPath();
-                ctx.arc(10, 26, 3.5, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(26,54,93,0.8)';
+                ctx.arc(11, logH / 2, 4, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(26,54,93,0.85)';
                 ctx.fill();
-                ctx.font = `300 ${fontSize}px "Helvetica Neue", Arial, sans-serif`;
-                ctx.fillStyle = 'rgba(26,46,74,0.72)';
-                ctx.fillText(text, 20, 34);
-                return new THREE.CanvasTexture(c);
+                ctx.font = `400 ${fontSize}px "Noto Sans JP", "Helvetica Neue", Arial, sans-serif`;
+                ctx.fillStyle = 'rgba(26,46,74,0.78)';
+                ctx.fillText(text, 24, logH / 2 + fontSize * 0.36);
+                const tex = new THREE.CanvasTexture(c);
+                tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                return tex;
             }
 
             const nodes = nodeData.map(d => {
@@ -960,7 +966,7 @@
                 })));
 
                 const dot = new THREE.Mesh(
-                    new THREE.SphereGeometry(0.07, 8, 8),
+                    new THREE.SphereGeometry(0.035, 8, 8),
                     new THREE.MeshBasicMaterial({ color: 0x1a365d, transparent: true, opacity: 0.7 })
                 );
                 dot.position.set(x, y, z);
