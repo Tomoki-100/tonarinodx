@@ -38,6 +38,53 @@
         body { font-family: 'Noto Sans JP', sans-serif; color: #334155; }
         .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        @keyframes works-scroll-right {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        @keyframes works-scroll-left {
+            from { transform: translateX(-50%); }
+            to   { transform: translateX(0); }
+        }
+        .works-track-right {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            animation: works-scroll-right 40s linear infinite;
+        }
+        .works-track-left {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            animation: works-scroll-left 40s linear infinite;
+        }
+        .works-row:hover .works-track-right,
+        .works-row:hover .works-track-left {
+            animation-play-state: paused;
+        }
+        .works-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px 22px;
+            width: 268px;
+            flex-shrink: 0;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .works-card:hover {
+            border-color: #f97316;
+            box-shadow: 0 6px 28px rgba(249,115,22,0.10);
+        }
+        .works-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #f0f4f8;
+            color: #475569;
+            border: 1px solid #d9e2ec;
+        }
     </style>
 </head>
 <body class="bg-slate-50 antialiased">
@@ -291,55 +338,286 @@
     </section>
 
     <!-- Works -->
-    <section id="works" class="py-24 bg-navy-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-end mb-12">
-                <div>
-                    <p class="text-accent-500 font-bold tracking-wider uppercase text-sm mb-2">Works</p>
-                    <h2 class="text-3xl md:text-4xl font-bold">実績・事例</h2>
+    <!-- Works -->
+    <section id="works" class="py-24" style="background:#f0f4f8;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+            <p class="font-bold tracking-wider uppercase text-sm mb-2" style="color:#f97316;">Works</p>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color:#0f172a;">あらゆる業界のDX化を支援しています</h2>
+            <p class="text-base" style="color:#475569;">業種・規模を問わず、現場に寄り添ったDX推進を伴走支援しています。</p>
+        </div>
+
+        <div style="position:relative; overflow:hidden;">
+            <!-- Fade masks -->
+            <div style="position:absolute;inset:0;z-index:10;pointer-events:none;background:linear-gradient(to right,#f0f4f8 0%,transparent 13%,transparent 87%,#f0f4f8 100%);"></div>
+
+            <!-- Row 1: scroll right -->
+            <div class="works-row" style="overflow:hidden; margin-bottom:16px; padding:6px 0;">
+                <div class="works-track-right">
+                    <!-- Card set A -->
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">卸売業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">受発注</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">受発注業務のデジタル化で<br>作業時間を70%削減</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">手書きFAX・電話で属人化していた業務をSlack・Notion・eFaxで自動化。ミス削減と引き継ぎを実現。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">IT・SaaS</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">システム開発</span><span class="works-tag">AI活用</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">AIチャットボット導入で24時間対応、<br>自動化率80%を達成</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">営業時間外の遅延を解消するAIボットを設置。顧客の声をAIで要約・分析しPDCAを加速。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">Web・SaaS</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">伴走支援</span><span class="works-tag">マーケ</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">AI活用で開発・集客を自動化し<br>リリースを加速</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">開発工数削減とSEO・記事作成の自動化を同時支援。データ基づく集客体制を構築しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">製造業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">進捗管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">生産ラインの進捗をリアルタイム可視化し<br>トラブル対応を迅速化</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">スプレッドシート管理を脱却しクラウド型ツールへ移行。経営と現場の情報共有が加速しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">飲食業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">予約管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">予約・顧客管理のシステム化で<br>回転率と満足度を向上</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">電話・紙台帳での予約管理をオンラインへ移行。再来訪促進メール配信も自動化しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">不動産</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">システム開発</span><span class="works-tag">ペーパーレス</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">物件情報・契約書管理のペーパーレス化で<br>業務効率を大幅改善</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">紙ベースの物件資料・契約書をクラウド管理へ移行。顧客への資料共有も即時対応可能に。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">医療・クリニック</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">電子化</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">紙カルテから電子化・予約自動化で<br>受付業務を70%削減</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">電子カルテ導入と予約システム連携により、受付・入力作業を大幅に短縮しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">小売業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">在庫管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">在庫管理と発注を自動化し<br>欠品・過剰在庫を解消</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">手動の在庫管理をシステム化し発注点を自動設定。棚卸し作業時間を半減しました。</p>
+                    </div>
+                    <!-- Card set B (duplicate for seamless loop) -->
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">卸売業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">受発注</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">受発注業務のデジタル化で<br>作業時間を70%削減</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">手書きFAX・電話で属人化していた業務をSlack・Notion・eFaxで自動化。ミス削減と引き継ぎを実現。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">IT・SaaS</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">システム開発</span><span class="works-tag">AI活用</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">AIチャットボット導入で24時間対応、<br>自動化率80%を達成</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">営業時間外の遅延を解消するAIボットを設置。顧客の声をAIで要約・分析しPDCAを加速。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">Web・SaaS</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">伴走支援</span><span class="works-tag">マーケ</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">AI活用で開発・集客を自動化し<br>リリースを加速</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">開発工数削減とSEO・記事作成の自動化を同時支援。データ基づく集客体制を構築しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">製造業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">進捗管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">生産ラインの進捗をリアルタイム可視化し<br>トラブル対応を迅速化</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">スプレッドシート管理を脱却しクラウド型ツールへ移行。経営と現場の情報共有が加速しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">飲食業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">予約管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">予約・顧客管理のシステム化で<br>回転率と満足度を向上</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">電話・紙台帳での予約管理をオンラインへ移行。再来訪促進メール配信も自動化しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">不動産</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">システム開発</span><span class="works-tag">ペーパーレス</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">物件情報・契約書管理のペーパーレス化で<br>業務効率を大幅改善</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">紙ベースの物件資料・契約書をクラウド管理へ移行。顧客への資料共有も即時対応可能に。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">医療・クリニック</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">電子化</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">紙カルテから電子化・予約自動化で<br>受付業務を70%削減</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">電子カルテ導入と予約システム連携により、受付・入力作業を大幅に短縮しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">小売業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">在庫管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">在庫管理と発注を自動化し<br>欠品・過剰在庫を解消</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">手動の在庫管理をシステム化し発注点を自動設定。棚卸し作業時間を半減しました。</p>
+                    </div>
                 </div>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="group bg-navy-800 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-300 border border-navy-700">
-                    <div class="h-48 relative overflow-hidden bg-navy-900">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="卸売業の受発注業務デジタル化" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex gap-2 mb-4">
-                            <span class="text-xs font-bold bg-navy-900 px-2 py-1 rounded text-slate-300 border border-navy-700">DX支援</span>
-                            <span class="text-xs font-bold bg-navy-900 px-2 py-1 rounded text-slate-300 border border-navy-700">卸売業</span>
+
+            <!-- Row 2: scroll left -->
+            <div class="works-row" style="overflow:hidden; padding:6px 0;">
+                <div class="works-track-left">
+                    <!-- Card set A -->
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">物流・運送業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">システム開発</span><span class="works-tag">配送最適化</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-3 leading-snug">紙と電話の受発注業務をデジタル化。<br>作業時間を70%以上削減。</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed mb-4">手書きFAXや電話で属人化していた業務を、SlackやNotion、eFaxを連携させて自動化。ミスの削減と引き継ぎしやすい環境を実現しました。</p>
-                        <p class="text-xs text-accent-500 font-bold"><i class="fa-regular fa-clock mr-1"></i> 支援期間：9ヶ月（継続中）</p>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">配送ルート最適化システムで<br>燃料費・残業を削減</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">GPS連携と最適ルート計算でドライバーの移動効率を改善。残業時間を月平均20時間削減。</p>
                     </div>
-                </div>
-                <div class="group bg-navy-800 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-300 border border-navy-700">
-                    <div class="h-48 relative overflow-hidden bg-navy-900">
-                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=800" alt="AIによるカスタマーサポート対応" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex gap-2 mb-4">
-                            <span class="text-xs font-bold bg-navy-900 px-2 py-1 rounded text-slate-300 border border-navy-700">システム開発</span>
-                            <span class="text-xs font-bold bg-navy-900 px-2 py-1 rounded text-slate-300 border border-navy-700">IT・SaaS</span>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">建設業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">現場管理</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-3 leading-snug">AIチャットボット導入で24時間対応。<br>応対の自動化率80%を達成。</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed mb-4">営業時間外の対応遅延を解消するため、AIボットを設置。さらにお客様の声をAIで要約・分析し、サービス改善のPDCAを回す仕組みを構築しました。</p>
-                        <p class="text-xs text-accent-500 font-bold"><i class="fa-regular fa-clock mr-1"></i> 支援期間：4ヶ月</p>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">工事進捗・原価管理をデジタル化し<br>現場の見える化を実現</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">手書き日報・口頭報告をクラウドアプリへ移行。経営者がリアルタイムで現場状況を把握可能に。</p>
                     </div>
-                </div>
-                <div class="group bg-navy-800 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-300 border border-navy-700">
-                    <div class="h-48 relative overflow-hidden bg-navy-900">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="AI開発＆マーケティング支援" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex gap-2 mb-4">
-                            <span class="text-xs font-bold bg-navy-900 px-2 py-1 rounded text-slate-300 border border-navy-700">伴走支援</span>
-                            <span class="text-xs font-bold bg-navy-900 px-2 py-1 rounded text-slate-300 border border-navy-700">Web・SaaS</span>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">教育機関</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">eラーニング</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-3 leading-snug">AI活用で開発と集客を自動化。<br>リリースとマーケティングを加速。</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed mb-4">AIを活用した開発工数の削減と、SEO分析・記事作成の自動化を同時に支援。データに基づく効果的な集客と継続的な改善体制を構築しました。</p>
-                        <p class="text-xs text-accent-500 font-bold"><i class="fa-regular fa-clock mr-1"></i> 支援期間：継続支援（月次）</p>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">オンライン授業・教材配信環境を整備し<br>学習効率を向上</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">対面授業の補完としてオンライン学習環境を構築。教材デジタル化で復習・予習が容易になりました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">サービス業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">伴走支援</span><span class="works-tag">CRM</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">予約・顧客管理CRM導入で<br>リピート率30%向上</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">顧客履歴の一元管理とLINE自動配信を組み合わせ、顧客との継続的な関係構築を実現。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">士業（税理士）</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">自動化</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">書類作成・申請フロー自動化で<br>対応件数を1.5倍に</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">定型書類テンプレート化とRPA活用で申請業務を大幅効率化。顧問先への価値提供に集中できる環境を整備。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">EC・通販</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">システム開発</span><span class="works-tag">受注管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">受注・在庫・配送の一元管理で<br>誤出荷ゼロへ</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">複数モールの受注をAPI連携で一元化。在庫の自動更新と出荷指示の自動化を実現しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">農業・食品</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">IoT活用</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">IoTセンサー活用で環境データを可視化し<br>品質を安定化</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">温湿度・CO2センサーをクラウド連携し異常値をLINEで即時通知。品質トラブルを未然に防止。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">金融・保険</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">電子申請</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">申請・審査フロー電子化で<br>処理時間を60%短縮</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">紙ベースの申請書類をWebフォームへ移行。自動審査チェックで承認スピードが大幅に改善。</p>
+                    </div>
+                    <!-- Card set B (duplicate for seamless loop) -->
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">物流・運送業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">システム開発</span><span class="works-tag">配送最適化</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">配送ルート最適化システムで<br>燃料費・残業を削減</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">GPS連携と最適ルート計算でドライバーの移動効率を改善。残業時間を月平均20時間削減。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">建設業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">現場管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">工事進捗・原価管理をデジタル化し<br>現場の見える化を実現</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">手書き日報・口頭報告をクラウドアプリへ移行。経営者がリアルタイムで現場状況を把握可能に。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">教育機関</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">eラーニング</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">オンライン授業・教材配信環境を整備し<br>学習効率を向上</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">対面授業の補完としてオンライン学習環境を構築。教材デジタル化で復習・予習が容易になりました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">サービス業</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">伴走支援</span><span class="works-tag">CRM</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">予約・顧客管理CRM導入で<br>リピート率30%向上</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">顧客履歴の一元管理とLINE自動配信を組み合わせ、顧客との継続的な関係構築を実現。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">士業（税理士）</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">自動化</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">書類作成・申請フロー自動化で<br>対応件数を1.5倍に</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">定型書類テンプレート化とRPA活用で申請業務を大幅効率化。顧問先への価値提供に集中できる環境を整備。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">EC・通販</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">システム開発</span><span class="works-tag">受注管理</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">受注・在庫・配送の一元管理で<br>誤出荷ゼロへ</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">複数モールの受注をAPI連携で一元化。在庫の自動更新と出荷指示の自動化を実現しました。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">農業・食品</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">DX支援</span><span class="works-tag">IoT活用</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">IoTセンサー活用で環境データを可視化し<br>品質を安定化</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">温湿度・CO2センサーをクラウド連携し異常値をLINEで即時通知。品質トラブルを未然に防止。</p>
+                    </div>
+                    <div class="works-card">
+                        <p style="font-size:11px;font-weight:700;color:#334155;margin-bottom:8px;">金融・保険</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+                            <span class="works-tag">業務改善</span><span class="works-tag">電子申請</span>
+                        </div>
+                        <h3 style="font-size:13px;font-weight:700;color:#0f172a;line-height:1.55;margin-bottom:8px;">申請・審査フロー電子化で<br>処理時間を60%短縮</h3>
+                        <p style="font-size:12px;color:#64748b;line-height:1.65;">紙ベースの申請書類をWebフォームへ移行。自動審査チェックで承認スピードが大幅に改善。</p>
                     </div>
                 </div>
             </div>
