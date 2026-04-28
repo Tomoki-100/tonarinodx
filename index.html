@@ -993,7 +993,7 @@
                 dot.position.set(x, y, z);
                 group.add(dot);
 
-                return { sprite, dot, baseY: y };
+                return { sprite, dot, baseY: y, sw };
             });
 
             let mouseX = 0, mouseY = 0;
@@ -1012,6 +1012,9 @@
             resize();
             new ResizeObserver(resize).observe(canvas);
 
+            const _wp = new THREE.Vector3();
+            const REF_DIST = 11;
+
             let t = 0;
             (function loop() {
                 requestAnimationFrame(loop);
@@ -1023,13 +1026,17 @@
                 ring1.rotation.z += 0.001;
                 ring2.rotation.z -= 0.0008;
                 ring3.rotation.y += 0.0012;
+                group.rotation.x += (mouseY * 0.3 - group.rotation.x) * 0.05;
+                group.rotation.y += (mouseX * 0.3 - group.rotation.y) * 0.05;
+                group.updateWorldMatrix(true, false);
                 nodes.forEach((n, i) => {
                     const wave = Math.sin(t + i * 0.9) * 0.12;
                     n.sprite.position.y = n.baseY + wave;
                     n.dot.position.y    = n.baseY + wave;
+                    n.sprite.getWorldPosition(_wp);
+                    const s = camera.position.distanceTo(_wp) / REF_DIST;
+                    n.sprite.scale.set(n.sw * s, 0.55 * s, 1);
                 });
-                group.rotation.x += (mouseY * 0.3 - group.rotation.x) * 0.05;
-                group.rotation.y += (mouseX * 0.3 - group.rotation.y) * 0.05;
                 renderer.render(scene, camera);
             })();
         })();
