@@ -922,7 +922,7 @@
                 const dpr = Math.min(window.devicePixelRatio || 1, 2);
                 const fontSize = 28;
                 const tmp = document.createElement('canvas').getContext('2d');
-                tmp.font = `400 ${fontSize}px "Noto Sans JP", "Helvetica Neue", Arial, sans-serif`;
+                tmp.font = `200 ${fontSize}px "Noto Sans JP", "Helvetica Neue", Arial, sans-serif`;
                 const tw = tmp.measureText(text).width;
                 const logW = Math.ceil(tw) + 48;
                 const logH = 56;
@@ -935,7 +935,7 @@
                 ctx.arc(11, logH / 2, 4, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(26,54,93,0.85)';
                 ctx.fill();
-                ctx.font = `400 ${fontSize}px "Noto Sans JP", "Helvetica Neue", Arial, sans-serif`;
+                ctx.font = `200 ${fontSize}px "Noto Sans JP", "Helvetica Neue", Arial, sans-serif`;
                 ctx.fillStyle = 'rgba(26,46,74,0.78)';
                 ctx.fillText(text, 24, logH / 2 + fontSize * 0.36);
                 const tex = new THREE.CanvasTexture(c);
