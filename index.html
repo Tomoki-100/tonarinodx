@@ -985,14 +985,7 @@
                     color: 0x1a365d, transparent: true, opacity: 0.15
                 })));
 
-                const dot = new THREE.Mesh(
-                    new THREE.SphereGeometry(0.018, 8, 8),
-                    new THREE.MeshBasicMaterial({ color: 0x1a365d, transparent: true, opacity: 0.7 })
-                );
-                dot.position.set(x, y, z);
-                group.add(dot);
-
-                return { sprite, dot, baseY: y, sw };
+                return { sprite, baseY: y, sw };
             });
 
             let mouseX = 0, mouseY = 0;
@@ -1036,7 +1029,6 @@
                 nodes.forEach((n, i) => {
                     const wave = Math.sin(t + i * 0.9) * 0.12;
                     n.sprite.position.y = n.baseY + wave;
-                    n.dot.position.y    = n.baseY + wave;
                     n.sprite.getWorldPosition(_wp);
                     const s = camera.position.distanceTo(_wp) / REF_DIST;
                     n.sprite.scale.set(n.sw * s, 0.55 * s, 1);
@@ -1065,9 +1057,7 @@
                                 const wyI = py * scr[i].dist / FOCAL;
                                 const wyJ = py * scr[j].dist / FOCAL;
                                 nodes[i].sprite.position.y += wyI;
-                                nodes[i].dot.position.y    += wyI;
                                 nodes[j].sprite.position.y -= wyJ;
-                                nodes[j].dot.position.y    -= wyJ;
                             }
                         }
                     }
