@@ -99,11 +99,12 @@
                     </a>
                 </div>
                 <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="#concept" class="text-sm font-medium text-slate-600 hover:text-navy-900 transition-colors">ご挨拶</a>
+                    <a href="#concept" class="text-sm font-medium text-slate-600 hover:text-navy-900 transition-colors">トナリノDXとは</a>
                     <a href="#service" class="text-sm font-medium text-slate-600 hover:text-navy-900 transition-colors">支援内容</a>
-                    <a href="#works" class="text-sm font-medium text-slate-600 hover:text-navy-900 transition-colors">実績</a>
-                    <a href="#about" class="text-sm font-medium text-slate-600 hover:text-navy-900 transition-colors">会社概要</a>
-                    <a href="#contact" class="bg-accent-500 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-accent-600 transition-colors shadow-md hover:shadow-lg">ご相談はこちら</a>
+                    <a href="#works" class="text-sm font-medium text-slate-600 hover:text-navy-900 transition-colors">支援実績</a>
+                    <a href="#integration" class="text-sm font-medium text-slate-600 hover:text-navy-900 transition-colors">自動化・連携</a>
+                    <a href="#faq" class="text-sm font-medium text-slate-600 hover:text-navy-900 transition-colors">よくある質問</a>
+                    <a href="#contact" class="bg-accent-500 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-accent-600 transition-colors shadow-md hover:shadow-lg">お問い合わせ</a>
                 </nav>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-slate-600 hover:text-navy-900 focus:outline-none">
@@ -114,17 +115,18 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
             <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#concept" class="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 rounded-md">ご挨拶</a>
+                <a href="#concept" class="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 rounded-md">トナリノDXとは</a>
                 <a href="#service" class="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 rounded-md">支援内容</a>
-                <a href="#works" class="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 rounded-md">実績</a>
-                <a href="#about" class="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 rounded-md">会社概要</a>
-                <a href="#contact" class="block px-3 py-3 mt-4 text-center text-base font-bold bg-accent-500 text-white rounded-md">ご相談はこちら</a>
+                <a href="#works" class="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 rounded-md">支援実績</a>
+                <a href="#integration" class="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 rounded-md">自動化・連携</a>
+                <a href="#faq" class="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 rounded-md">よくある質問</a>
+                <a href="#contact" class="block px-3 py-3 mt-4 text-center text-base font-bold bg-accent-500 text-white rounded-md">お問い合わせ</a>
             </div>
         </div>
     </header>
 
     <!-- Hero -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background:#f0f7ff;">
+    <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background:#f0f7ff;">
         <canvas id="hero-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold mb-6" style="background:rgba(249,115,22,0.12);color:#ea580c;border:1px solid rgba(249,115,22,0.35);">
@@ -411,7 +413,7 @@
     </section>
 
     <!-- Domain -->
-    <section class="py-24 bg-slate-50">
+    <section id="domain" class="py-24 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <p class="text-accent-500 font-bold tracking-wider uppercase text-sm mb-2">Domain</p>
@@ -467,7 +469,7 @@
     </section>
 
     <!-- Why Us -->
-    <section class="py-24 bg-white">
+    <section id="why" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <p class="text-accent-500 font-bold tracking-wider uppercase text-sm mb-2">Why Us</p>
@@ -629,7 +631,7 @@
     </section>
 
     <!-- FAQ -->
-    <section class="py-24 bg-navy-50">
+    <section id="faq" class="py-24 bg-navy-50">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <p class="text-accent-500 font-bold tracking-wider uppercase text-sm mb-2">FAQ</p>
