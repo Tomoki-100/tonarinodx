@@ -85,6 +85,76 @@
             color: #475569;
             border: 1px solid #d9e2ec;
         }
+        /* Hero Three.js */
+        #hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            background: #f0f7ff;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 65%;
+            height: 100%;
+            z-index: 0;
+            display: block;
+        }
+        #hero-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 65%;
+            height: 100%;
+            background: radial-gradient(ellipse at 10% center, #f0f7ff 20%, transparent 65%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            padding: 0 7vw;
+            max-width: 600px;
+        }
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #ea580c;
+            background: rgba(249,115,22,0.12);
+            border: 1px solid rgba(249,115,22,0.35);
+            padding: 0.375rem 1rem;
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 7vw;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+        .scroll-hint::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: #f97316;
+        }
     </style>
 </head>
 <body class="bg-slate-50 antialiased">
@@ -128,22 +198,25 @@
     </header>
 
     <!-- Hero -->
-    <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background:#f0f7ff;">
-        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold mb-6" style="background:rgba(249,115,22,0.12);color:#ea580c;border:1px solid rgba(249,115,22,0.35);">
+    <section id="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div id="hero-overlay"></div>
+
+        <div class="hero-inner">
+            <div class="hero-label">
                 <i class="fa-solid fa-location-dot"></i> AI × DX支援 ／ 名古屋
             </div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6" style="color:#0f172a;">
                 となりにいるから、<br><span id="typing-text"></span><span id="typing-cursor" style="color:#f97316;">|</span>
             </h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl font-medium mb-10" style="color:#475569;">中小企業のための、<br class="md:hidden">やさしい業務改善と開発支援</p>
-            <div class="flex justify-center">
-                <a href="#contact" class="text-white text-base md:text-lg font-bold py-3 px-6 md:py-4 md:px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-2" style="background:#f97316;" onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#f97316'">
-                    まずはご相談ください（無料） <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
+            <p class="mt-4 text-lg sm:text-xl font-medium mb-10" style="color:#475569;">中小企業のための、<br class="md:hidden">やさしい業務改善と開発支援</p>
+            <a href="#contact" class="text-white text-base md:text-lg font-bold py-3 px-6 md:py-4 md:px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 inline-flex items-center gap-2" style="background:#f97316;" onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#f97316'">
+                まずはご相談ください（無料） <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
+
+        <div class="scroll-hint">Scroll</div>
+
         <div class="absolute bottom-0 w-full overflow-hidden leading-none z-10">
             <svg class="relative block w-full h-[50px] md:h-[100px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,120.31,200.5,110.5,241.1,104.91,281.41,83.4,321.39,56.44Z" fill="#f8fafc"></path>
@@ -748,70 +821,190 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        /* --- Canvas Particle Animation --- */
-        (function() {
+        /* --- Three.js Hero Animation --- */
+        (function () {
             const canvas = document.getElementById('hero-canvas');
-            const ctx = canvas.getContext('2d');
-            const NODE_COLOR = 'rgba(26,54,93,0.35)';
-            const LINE_COLOR = 'rgba(15,23,42,0.12)';
-            const NODE_COUNT = 60;
-            const CONNECT_DIST = 140;
-            let nodes = [];
+
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setClearColor(0x000000, 0);
+
+            const scene  = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+            camera.position.z = 9;
+
+            const group = new THREE.Group();
+            group.position.x = 3;
+            scene.add(group);
+
+            const outerMesh = new THREE.Mesh(
+                new THREE.IcosahedronGeometry(3.5, 2),
+                new THREE.MeshBasicMaterial({ color: 0x1a365d, wireframe: true, transparent: true, opacity: 0.2 })
+            );
+            group.add(outerMesh);
+
+            const innerMesh = new THREE.Mesh(
+                new THREE.IcosahedronGeometry(2.2, 1),
+                new THREE.MeshBasicMaterial({ color: 0xf97316, wireframe: true, transparent: true, opacity: 0.12 })
+            );
+            group.add(innerMesh);
+
+            const count = 600;
+            const pos   = new Float32Array(count * 3);
+            for (let i = 0; i < count; i++) {
+                const theta = Math.random() * Math.PI * 2;
+                const phi   = Math.acos(2 * Math.random() - 1);
+                const r     = 2.6 + Math.random() * 2.2;
+                pos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
+                pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                pos[i * 3 + 2] = r * Math.cos(phi);
+            }
+            const pGeo = new THREE.BufferGeometry();
+            pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+            group.add(new THREE.Points(pGeo, new THREE.PointsMaterial({
+                color: 0xf97316, size: 0.055, transparent: true, opacity: 0.5,
+                blending: THREE.AdditiveBlending, depthWrite: false
+            })));
+
+            function makeRing(radius, tilt, color, opacity) {
+                const pts = [];
+                for (let i = 0; i <= 128; i++) {
+                    const a = (i / 128) * Math.PI * 2;
+                    pts.push(new THREE.Vector3(Math.cos(a) * radius, Math.sin(a) * radius, 0));
+                }
+                const geo = new THREE.BufferGeometry().setFromPoints(pts);
+                const mat = new THREE.LineBasicMaterial({ color, transparent: true, opacity });
+                const ring = new THREE.Line(geo, mat);
+                ring.rotation.x = tilt;
+                return ring;
+            }
+            const ring1 = makeRing(4.6, Math.PI * 0.28, 0x1a365d, 0.18);
+            const ring2 = makeRing(5.1, Math.PI * 0.62, 0xf97316, 0.12);
+            const ring3 = makeRing(4.0, Math.PI * 0.78, 0x1a365d, 0.10);
+            group.add(ring1, ring2, ring3);
+
+            const nodeData = [
+                { label: 'AI',               r: 5.5, theta: 0.40, phi: 1.10 },
+                { label: 'DX',               r: 5.2, theta: 2.10, phi: 0.70 },
+                { label: 'LLM',              r: 5.1, theta: 5.00, phi: 0.90 },
+                { label: 'Machine Learning', r: 6.0, theta: 2.80, phi: 1.00 },
+                { label: 'Deep Learning',    r: 5.8, theta: 1.30, phi: 2.30 },
+                { label: 'NLP',              r: 5.3, theta: 4.10, phi: 0.60 },
+                { label: 'Computer Vision',  r: 6.1, theta: 3.90, phi: 1.70 },
+                { label: 'Generative AI',    r: 5.7, theta: 0.70, phi: 2.50 },
+                { label: 'Claude',           r: 5.6, theta: 1.90, phi: 1.50 },
+                { label: 'Claude Code',      r: 5.9, theta: 5.30, phi: 1.20 },
+                { label: 'Anthropic',        r: 5.4, theta: 3.10, phi: 0.40 },
+                { label: 'Salesforce',       r: 5.8, theta: 4.60, phi: 2.00 },
+                { label: 'HubSpot',          r: 5.3, theta: 2.50, phi: 2.70 },
+                { label: 'kintone',          r: 5.6, theta: 0.20, phi: 1.80 },
+                { label: 'Notion',           r: 5.1, theta: 3.40, phi: 1.30 },
+                { label: 'Slack',            r: 5.5, theta: 1.60, phi: 0.30 },
+                { label: 'Google Workspace', r: 6.0, theta: 4.30, phi: 0.80 },
+                { label: 'Microsoft 365',    r: 5.7, theta: 5.70, phi: 2.40 },
+                { label: 'Zapier',           r: 5.2, theta: 2.90, phi: 2.10 },
+                { label: 'Make',             r: 5.4, theta: 0.60, phi: 0.50 },
+                { label: 'API',              r: 5.6, theta: 4.80, phi: 0.50 },
+                { label: 'Automation',       r: 5.8, theta: 3.60, phi: 1.40 },
+                { label: 'Cloud',            r: 5.3, theta: 1.00, phi: 2.00 },
+                { label: 'Integration',      r: 5.4, theta: 0.90, phi: 2.60 },
+                { label: 'Workflow',         r: 5.7, theta: 3.20, phi: 0.30 },
+                { label: 'Analytics',        r: 5.2, theta: 4.20, phi: 2.20 },
+                { label: 'IoT',              r: 5.9, theta: 1.70, phi: 1.60 },
+                { label: 'Data',             r: 5.0, theta: 5.50, phi: 1.80 },
+                { label: 'No-Code',          r: 5.5, theta: 2.30, phi: 0.95 },
+                { label: 'RAG',              r: 5.3, theta: 4.70, phi: 1.55 },
+            ];
+
+            function makeSprite(text) {
+                const fontSize = 20;
+                const tmp = document.createElement('canvas').getContext('2d');
+                tmp.font = `300 ${fontSize}px "Helvetica Neue", Arial, sans-serif`;
+                const tw = tmp.measureText(text).width;
+                const c = document.createElement('canvas');
+                c.width  = Math.ceil(tw) + 46;
+                c.height = 52;
+                const ctx = c.getContext('2d');
+                ctx.beginPath();
+                ctx.arc(10, 26, 3.5, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(26,54,93,0.8)';
+                ctx.fill();
+                ctx.font = `300 ${fontSize}px "Helvetica Neue", Arial, sans-serif`;
+                ctx.fillStyle = 'rgba(26,46,74,0.72)';
+                ctx.fillText(text, 20, 34);
+                return new THREE.CanvasTexture(c);
+            }
+
+            const nodes = nodeData.map(d => {
+                const x = d.r * Math.sin(d.phi) * Math.cos(d.theta);
+                const y = d.r * Math.sin(d.phi) * Math.sin(d.theta);
+                const z = d.r * Math.cos(d.phi);
+
+                const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+                    map: makeSprite(d.label), transparent: true, opacity: 0.9, depthWrite: false
+                }));
+                const sw = Math.max(1.8, d.label.length * 0.14 + 0.6);
+                sprite.scale.set(sw, 0.55, 1);
+                sprite.position.set(x, y, z);
+                group.add(sprite);
+
+                const surfaceR = 3.6;
+                const lineGeo = new THREE.BufferGeometry().setFromPoints([
+                    new THREE.Vector3((surfaceR / d.r) * x, (surfaceR / d.r) * y, (surfaceR / d.r) * z),
+                    new THREE.Vector3(x, y, z)
+                ]);
+                group.add(new THREE.Line(lineGeo, new THREE.LineBasicMaterial({
+                    color: 0x1a365d, transparent: true, opacity: 0.15
+                })));
+
+                const dot = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.07, 8, 8),
+                    new THREE.MeshBasicMaterial({ color: 0x1a365d, transparent: true, opacity: 0.7 })
+                );
+                dot.position.set(x, y, z);
+                group.add(dot);
+
+                return { sprite, dot, baseY: y };
+            });
+
+            let mouseX = 0, mouseY = 0;
+            window.addEventListener('mousemove', e => {
+                mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
 
             function resize() {
-                canvas.width = canvas.offsetWidth;
-                canvas.height = canvas.offsetHeight;
+                const w = canvas.clientWidth, h = canvas.clientHeight;
+                if (!w || !h) return;
+                renderer.setSize(w, h, false);
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
             }
-
-            function initNodes() {
-                nodes = [];
-                for (let i = 0; i < NODE_COUNT; i++) {
-                    nodes.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        vx: (Math.random() - 0.5) * 0.4,
-                        vy: (Math.random() - 0.5) * 0.4,
-                        r: Math.random() * 2 + 1.5
-                    });
-                }
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (let i = 0; i < nodes.length; i++) {
-                    const a = nodes[i];
-                    for (let j = i + 1; j < nodes.length; j++) {
-                        const b = nodes[j];
-                        const dx = a.x - b.x, dy = a.y - b.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < CONNECT_DIST) {
-                            ctx.beginPath();
-                            ctx.strokeStyle = LINE_COLOR;
-                            ctx.lineWidth = 1;
-                            ctx.globalAlpha = 1 - dist / CONNECT_DIST;
-                            ctx.moveTo(a.x, a.y);
-                            ctx.lineTo(b.x, b.y);
-                            ctx.stroke();
-                            ctx.globalAlpha = 1;
-                        }
-                    }
-                    ctx.beginPath();
-                    ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-                    ctx.fillStyle = NODE_COLOR;
-                    ctx.fill();
-                    a.x += a.vx;
-                    a.y += a.vy;
-                    if (a.x < 0 || a.x > canvas.width) a.vx *= -1;
-                    if (a.y < 0 || a.y > canvas.height) a.vy *= -1;
-                }
-                requestAnimationFrame(draw);
-            }
-
-            window.addEventListener('resize', () => { resize(); initNodes(); });
             resize();
-            initNodes();
-            draw();
+            new ResizeObserver(resize).observe(canvas);
+
+            let t = 0;
+            (function loop() {
+                requestAnimationFrame(loop);
+                t += 0.008;
+                outerMesh.rotation.y += 0.003;
+                outerMesh.rotation.x += 0.0008;
+                innerMesh.rotation.y -= 0.002;
+                innerMesh.rotation.z += 0.001;
+                ring1.rotation.z += 0.001;
+                ring2.rotation.z -= 0.0008;
+                ring3.rotation.y += 0.0012;
+                nodes.forEach((n, i) => {
+                    const wave = Math.sin(t + i * 0.9) * 0.12;
+                    n.sprite.position.y = n.baseY + wave;
+                    n.dot.position.y    = n.baseY + wave;
+                });
+                group.rotation.x += (mouseY * 0.3 - group.rotation.x) * 0.05;
+                group.rotation.y += (mouseX * 0.3 - group.rotation.y) * 0.05;
+                renderer.render(scene, camera);
+            })();
         })();
 
         /* --- Typing Animation --- */
